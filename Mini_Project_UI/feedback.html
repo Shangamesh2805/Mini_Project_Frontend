@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Feedback</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+<body>
+    <div class="container container-fluid">
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 col-lg-6">
+                <h3>Submit Your Feedback</h3>
+                <form id="feedback-form">
+                    <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <ul class="stars">
+                            <li class="star"><i class="fa fa-star"></i></li>
+                            <li class="star"><i class="fa fa-star"></i></li>
+                            <li class="star"><i class="fa fa-star"></i></li>
+                            <li class="star"><i class="fa fa-star"></i></li>
+                            <li class="star"><i class="fa fa-star"></i></li>
+                        </ul>
+                        <input type="hidden" id="rating" name="rating" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="comments">Comments</label>
+                        <textarea name="comments" id="comments" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoId = urlParams.get('id');
+            const userId = 1; // This should be dynamically fetched based on the logged-in user
+
+            const stars = document.querySelectorAll('.star');
+
+            stars.forEach((star, index) => {
+                star.starValue = index + 1;
+
+                ['click', 'mouseover', 'mouseout'].forEach(function(e) {
+                    star.addEventListener(e, showRaings);
+                });
+            });
+
+            function showRaings(e) {
+                stars.forEach((star, index) => {
+                    if(e.type === 'click') {
+                        if(index < this.starValue) {
+                            star.classList.add('orange');
+                            document.getElementById('rating').value = this.starValue;
+                        } else {
+                            star.classList.remove('orange');
+                        }
+                    }
+
+                    if(e.type === 'mouseover') {
+                        if(index < this.starValue) {
+                            star.classList.add('yellow');
+                        } else {
+                            star.classList.remove('yellow');
+                        }
+                    }
+
+                    if(e.type === 'mouseout') {
+                        star.classList.remove('yellow');
+                    }
+                });
+            }
+
+            document.getElementById('feedback-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const rating = document.getElementById('rating').value;
+                const comments = document.getElementById('comments').value;
+
+                const feedback = {
+                    Rating: rating,
+                    Comments: comments,
+                    UserId: userId,
+                    VideoId: videoId
+                };
+
+                fetch('/api/feedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(feedback)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Feedback submitted successfully!');
+                    window.location.href = `/video-details.html?id=${videoId}`;
+                })
+                .catch(error => console.error('Error submitting feedback:', error));
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7Hfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

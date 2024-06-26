@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+
+    <style>
+        body {
+            font-family: 'Amazon Ember', sans-serif;
+        }
+        .hero-section {
+            background: linear-gradient(to bottom, rgba(245, 253, 255, 0.758), rgba(80, 137, 221, 0.5));
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .hero-section h1 {
+            font-size: 4rem;
+            animation: fadeInDown 1s;
+        }
+        .hero-section p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            animation: fadeInUp 1s;
+        }
+        .hero-section .btn {
+            margin: 10px;
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .navbar-nav .nav-item .nav-link.active {
+            font-weight: bold;
+        }
+        .section-title {
+            text-align: center;
+            margin: 50px 0;
+            font-size: 2.5rem;
+        }
+        .about-section {
+            background: linear-gradient(to right, #f9f9f9, #e0e0e0);
+            padding: 50px 0;
+        }
+        .about-section p {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+        .why-us, .about-store {
+            margin: 30px 0;
+            animation: fadeIn 2s;
+        }
+        .why-us h3, .about-store h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .about-section .btn {
+            display: block;
+            margin: 20px auto;
+        }
+        .about-content {
+            background: linear-gradient(to top, #f4f4f4, #5db4e6);
+            padding: 30px;
+            color: rgb(238, 236, 236);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(206, 201, 201, 0.1);
+            animation: fadeInUp 2s;
+        }
+        .about-content h3 {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .about-content p {
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <h1>Presidio
+            <img src="images/logo.png" alt="Logo" style="width: 40px; height: 40px;"></h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="login-button" href="login.html">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="signup-button" href="register.html">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-button" href="profile.html" style="display:none;">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <div>
+            <h1>Welcome to Presidio's Video Store!</h1>
+            <p>Explore our amazing videos and offers.</p>
+            <a href="#products" class="btn btn-primary btn-lg">Rent Now</a>
+            <a href="#about" class="btn btn-secondary btn-lg">Learn More</a>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div id="products" class="row">
+            <!-- Videos will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <div id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Our Video Store</h2>
+            <div class="row">
+                <div class="col-md-6 why-us">
+                    <div class="about-content">
+                        <h3>Why Us?</h3>
+                        <p>Presidio Video Store offers a curated collection of the best movies and TV shows. Our user-friendly platform and affordable rental options make it easy to find and enjoy your favorite videos.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 about-store">
+                    <div class="about-content">
+                        <h3>About Our Store</h3>
+                        <p>Established in 2024, Presidio Video Store has quickly become a favorite destination for video enthusiasts. With a wide range of genres and the latest releases, we provide an unmatched viewing experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-4">
+        <p>&copy; 2024 Shangu's Website. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const isLoggedIn = false; 
+
+        if (isLoggedIn) {
+            document.getElementById('login-button').style.display = 'none';
+            document.getElementById('signup-button').style.display = 'none';
+            document.getElementById('profile-button').style.display = 'block';
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("/api/videos")
+                .then(response => response.json())
+                .then(videos => {
+                    const productsContainer = document.getElementById('products');
+                    videos.forEach(video => {
+                        const videoCard = `
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <img src="${video.VideoImageUrl}" class="card-img-top" alt="${video.Title}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${video.Title}</h5>
+                                        <p class="card-text">${video.Description}</p>
+                                        <p class="card-text">Genre: ${video.Genre}</p>
+                                        <p class="card-text">Price: $${video.Price}</p>
+                                        <a href="video-details.html?id=${video.VideoId}" class="btn btn-primary">View Details</a>
+                                        <button class="btn btn-secondary add-to-cart" 
+                                                data-id="${video.VideoId}" 
+                                                data-title="${video.Title}" 
+                                                data-description="${video.Description}" 
+                                                data-genre="${video.Genre}" 
+                                                data-price="${video.Price}" 
+                                                data-image="${video.VideoImageUrl}">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>`;
+                        productsContainer.innerHTML += videoCard;
+                    });
+                })
+                .catch(error => console.error('Error fetching videos:', error));
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('add-to-cart')) {
+                const videoId = e.target.getAttribute('data-id');
+                const videoTitle = e.target.getAttribute('data-title');
+                const videoDescription = e.target.getAttribute('data-description');
+                const videoGenre = e.target.getAttribute('data-genre');
+                const videoPrice = e.target.getAttribute('data-price');
+                const videoImage = e.target.getAttribute('data-image');
+
+                const cartItem = {
+                    id: videoId,
+                    title: videoTitle,
+                    description: videoDescription,
+                    genre: videoGenre,
+                    price: videoPrice,
+                    image: videoImage
+                };
+
+                let cart = localStorage.getItem('cart');
+                if (cart) {
+                    cart = JSON.parse(cart);
+                } else {
+                    cart = [];
+                }
+
+                cart.push(cartItem);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`${videoTitle} has been added to your cart!`);
+            }
+        });
+    </script>
+</body>
+</html>

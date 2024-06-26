@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <h1>Presidio
+            <img src="images/logo.png" alt="Logo" style="width: 40px; height: 40px;"></h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-button" href="profile.html" style="display:none;">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container container-fluid">
+        <h1 class="my-5">Your Cart</h1>
+        <div id="cart-items" class="row">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <div class="row">
+            <div class="col-md-4 offset-md-8 text-right">
+                <h4>Total: $<span id="cart-total">0.00</span></h4>
+                <button class="btn btn-primary" id="place-order-button">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            let cart = localStorage.getItem('cart');
+            if (cart) {
+                cart = JSON.parse(cart);
+                cart.forEach(item => {
+                    const cartItem = `
+                        <div class="col-md-12">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="${item.image}" class="card-img" alt="${item.title}">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${item.title}</h5>
+                                            <p class="card-text">${item.description}</p>
+                                            <p class="card-text"><small class="text-muted">Genre: ${item.genre}</small></p>
+                                            <p class="card-text">Price: $${item.price}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                    cartItemsContainer.innerHTML += cartItem;
+                });
+
+                const total = cart.reduce((sum, item) => sum + parseFloat(item.price), 0).toFixed(2);
+                document.getElementById('cart-total').textContent = total;
+            }
+        });
+
+        document.getElementById('place-order-button').addEventListener('click', function() {
+            window.location.href = 'place-order.html';
+        });
+    </script>
+</body>
+</html>

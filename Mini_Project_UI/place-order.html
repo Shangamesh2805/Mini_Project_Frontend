@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <h1>Presidio
+            <img src="images/logo.png" alt="Logo" style="width: 40px; height: 40px;"></h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-button" href="profile.html" style="display:none;">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container container-fluid">
+        <h1 class="my-5">Place Your Order</h1>
+        <form id="place-order-form">
+            <div class="form-group">
+                <label for="shippingAddress">Shipping Address</label>
+                <input type="text" class="form-control" id="shippingAddress" placeholder="Enter your shipping address" required>
+            </div>
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method</label>
+                <select class="form-control" id="paymentMethod" required>
+                    <option value="">Select a payment method</option>
+                    <option value="COD">Cash on Delivery</option>
+                    <option value="Online">Online Payment</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Order</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('place-order-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const shippingAddress = document.getElementById('shippingAddress').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const orderData = {
+                userId: 1, // Assume logged in user ID is 1
+                paymentAmount: parseFloat(localStorage.getItem('cartTotal')),
+                totalAmount: parseFloat(localStorage.getItem('cartTotal')),
+                orderDate: new Date(),
+                rentalExpireDate: new Date(new Date().setDate(new Date().getDate() + 30)),
+                shippingAddress: shippingAddress,
+                paymentMethod: paymentMethod
+            };
+
+            if (paymentMethod === 'COD') {
+                // Simulate successful order placement
+                alert('Order placed successfully with Cash on Delivery!');
+                saveOrder(orderData);
+                window.location.href = 'order_success.html';
+            } else if (paymentMethod === 'Online') {
+                // Simulate redirect to payment page
+                localStorage.setItem('orderData', JSON.stringify(orderData));
+                window.location.href = 'payment.html';
+            } else {
+                alert('Please select a payment method.');
+            }
+        });
+
+        function saveOrder(orderData) {
+            fetch('/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Order saved successfully:', data);
+                localStorage.removeItem('cart');
+                localStorage.removeItem('cartTotal');
+            })
+            .catch(error => console.error('Error saving order:', error));
+        }
+    </script>
+</body>
+</html>

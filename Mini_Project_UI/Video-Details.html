@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Details</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <style>
+        body {
+            font-family: 'Amazon Ember', sans-serif;
+        }
+        .details-section {
+            padding: 50px 0;
+        }
+        .details-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .details-container {
+            display: flex;
+            justify-content: center;
+        }
+        .details-card {
+            max-width: 800px;
+        }
+        .details-card img {
+            width: 100%;
+        }
+        .details-card .card-body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <h1>Presidio
+            <img src="images/logo.png" alt="Logo" style="width: 40px; height: 40px;"></h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="login-button" href="login.html">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="signup-button" href="register.html">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-button" href="profile.html" style="display:none;">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container details-section">
+        <h2>Video Details</h2>
+        <div class="details-container">
+            <div class="card details-card">
+                <img src="" id="video-image" class="card-img-top" alt="Video Image">
+                <div class="card-body">
+                    <h5 class="card-title" id="video-title"></h5>
+                    <p class="card-text" id="video-description"></p>
+                    <p class="card-text">Genre: <span id="video-genre"></span></p>
+                    <p class="card-text">Price: $<span id="video-price"></span></p>
+                    <button class="btn btn-secondary" id="add-to-cart-button">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-4">
+        <p>&copy; 2024 Shangu's Website. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoId = urlParams.get('id');
+
+            fetch(`/api/videos/${videoId}`)
+                .then(response => response.json())
+                .then(video => {
+                    document.getElementById('video-image').src = video.VideoImageUrl;
+                    document.getElementById('video-title').innerText = video.Title;
+                    document.getElementById('video-description').innerText = video.Description;
+                    document.getElementById('video-genre').innerText = video.Genre;
+                    document.getElementById('video-price').innerText = video.Price;
+                    document.getElementById('add-to-cart-button').setAttribute('data-id', video.VideoId);
+                })
+                .catch(error => console.error('Error fetching video details:', error));
+        });
+
+        document.getElementById('add-to-cart-button').addEventListener('click', function() {
+            const videoId = this.getAttribute('data-id');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const videoInCart = cart.find(item => item.VideoId === videoId);
+
+            if (videoInCart) {
+                videoInCart.Quantity += 1;
+            } else {
+                cart.push({ VideoId: videoId, Quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            console.log(`Video with ID ${videoId} added to cart.`);
+        });
+    </script>
+</body>
+</html>

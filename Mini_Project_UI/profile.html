@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+<body>
+    <div class="container container-fluid">
+        <h2 class="mt-5 ml-5">My Profile</h2>
+        <div class="row justify-content-around mt-5 user-info">
+            <div class="col-12 col-md-3">
+                <figure class='avatar avatar-profile'>
+                    <img id="profile_avatar" class="rounded-circle img-fluid" src='./images/profile.jpg' alt='' />
+                </figure>
+                <a href="update-profile.html" id="edit_profile" class="btn btn-primary btn-block my-5">
+                    Edit Profile
+                </a>
+            </div>
+     
+            <div class="col-12 col-md-5">
+                 <h4>Full Name</h4>
+                 <p id="full_name">Loading...</p>
+     
+                 <h4>Email Address</h4>
+                 <p id="email_address">Loading...</p>
+                 
+                 <h4>Membership Type</h4>
+                 <p id="membership_type">Loading...</p>
+
+                 <a href="#" class="btn btn-danger btn-block mt-5">
+                    My Orders
+                </a>
+
+                <a href="change-password.html" class="btn btn-primary btn-block mt-3">
+                    Change Password
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('http://localhost:5000/api/user')
+                .then(response => response.json())
+                .then(user => {
+                    document.getElementById('full_name').innerText = user.name;
+                    document.getElementById('email_address').innerText = user.email;
+                    document.getElementById('profile_avatar').src = user.avatar;
+                    document.getElementById('membership_type').innerText = user.membershipType;
+                })
+                .catch(error => console.error('Error fetching user data:', error));
+        });
+    </script>
+</body>
+</html>

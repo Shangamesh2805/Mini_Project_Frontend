@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Video</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.cdnfonts.com/css/amazon-ember"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+
+    <style>
+        input:invalid, select:invalid, textarea:invalid {
+            border: 2px solid red;
+        }
+        input:valid, select:valid, textarea:valid {
+            border: 2px solid green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-fluid">
+        <div class="wrapper my-5"> 
+        <form class="shadow-lg" id="videoForm" encType='multipart/form-data'>
+            <h1 class="mb-4">New Video</h1>
+
+            <div class="form-group">
+              <label for="title_field">Title</label>
+              <input
+                type="text"
+                id="title_field"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+                <label for="price_field">Price</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  id="price_field"
+                  class="form-control"
+                  required
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="description_field">Description</label>
+                <textarea class="form-control" id="description_field" rows="8" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="genre_field">Genre</label>
+                <select class="form-control" id="genre_field" required>
+                    <option value="" disabled selected>Select Genre</option>
+                    <option value="Sci_Fic">Sci-Fic</option>
+                    <option value="Action">Action</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Bio_pic">Bio-pic</option>
+                    <option value="Animation">Animation</option>
+                    <option value="Marvel">Marvel</option>
+                    <option value="Disney">Disney</option>
+                    <option value="DC">DC</option>
+                    <option value="Historical">Historical</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Thriller">Thriller</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="availability_field">Availability</label>
+                <select class="form-control" id="availability_field" required>
+                    <option value="" disabled selected>Select Availability</option>
+                    <option value="true">Available</option>
+                    <option value="false">Not Available</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="video_format_field">Video Format</label>
+                <select class="form-control" id="video_format_field" required>
+                    <option value="" disabled selected>Select Video Format</option>
+                    <option value="DVD">DVD</option>
+                    <option value="BlueRay">BlueRay</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="video_count_field">Video Count</label>
+                <input
+                  type="number"
+                  id="video_count_field"
+                  class="form-control"
+                  required
+                  min="0"
+                  max="5"
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="publisher_id_field">Publisher ID</label>
+                <input
+                  type="number"
+                  id="publisher_id_field"
+                  class="form-control"
+                  required
+                />
+            </div>
+              
+            <div class="form-group">
+                <label for="video_image">Video Image</label>
+                <div class="custom-file">
+                    <input
+                        type="file"
+                        name="video_image"
+                        class="custom-file-input"
+                        id="video_image"
+                        required
+                    />
+                    <label class="custom-file-label" for="video_image">
+                        Choose Image
+                    </label>
+                </div>
+            </div>
+
+            <button
+              id="create_button"
+              type="submit"
+              class="btn btn-block py-3 btn-primary"
+            >
+              CREATE
+            </button>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    document.getElementById('videoForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const formData = new FormData();
+        formData.append('Title', document.getElementById('title_field').value);
+        formData.append('Price', document.getElementById('price_field').value);
+        formData.append('Description', document.getElementById('description_field').value);
+        formData.append('Genre', document.getElementById('genre_field').value);
+        formData.append('Availability', document.getElementById('availability_field').value);
+        formData.append('VideoFormat', document.getElementById('video_format_field').value);
+        formData.append('VideoCount', document.getElementById('video_count_field').value);
+        formData.append('PublisherId', document.getElementById('publisher_id_field').value);
+        formData.append('VideoImage', document.getElementById('video_image').files[0]);
+
+        fetch('/api/videos', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Video added successfully!');
+                // Reset form after successful submission
+                document.getElementById('videoForm').reset();
+            } else {
+                alert('Failed to add video');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while adding the video');
+        });
+    });
+</script>
+</body>
+</html>
