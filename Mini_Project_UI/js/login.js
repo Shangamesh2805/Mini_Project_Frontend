@@ -13,6 +13,9 @@ $(document).ready(function() {
             success: function(response) {
                 alert('Login successful!');
                 localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('token', response.token);
+                localStorage.setItem('userId', response.userId);
+                localStorage.setItem('role', response.role);
                 window.location.href = 'index.html';
             },
             error: function(error) {

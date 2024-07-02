@@ -6,7 +6,6 @@
     <title>Index Page</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link href="https://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
 
     <style>
@@ -78,7 +77,7 @@
             margin: 20px auto;
         }
         .about-content {
-            background: linear-gradient(to top, #f4f4f4, #5db4e6);
+            background: linear-gradient(to top,  rgba(245, 253, 255, 0.758), rgba(80, 137, 221, 0.5));
             padding: 30px;
             color: rgb(238, 236, 236);
             border-radius: 8px;
@@ -92,6 +91,11 @@
         .about-content p {
             font-size: 1.1rem;
         }
+
+        .logout-button {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
@@ -115,6 +119,9 @@
                     <a class="nav-link" id="profile-button" href="profile.html" style="display:none;">Profile</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" id="logout-button" href="#" style="display:none;">Logout</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a>
                 </li>
             </ul>
@@ -135,6 +142,7 @@
             <!-- Videos will be dynamically inserted here -->
         </div>
     </div>
+
 
     <div id="about" class="about-section">
         <div class="container">
