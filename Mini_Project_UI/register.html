@@ -87,19 +87,19 @@
         <form id="registerForm" novalidate>
             <div class="form-group">
                 <input type="text" id="name_field" class="form-control" placeholder="Name" required />
-                <div class="invalid-feedback">Please enter your name.</div>
+                <span id="name_error" class="text-danger" style="display: none;">Name is required</span>
             </div>
             <div class="form-group">
                 <input type="number" id="age_field" class="form-control" placeholder="Age" required min="1" />
-                <div class="invalid-feedback">Please enter a valid age.</div>
+                <span id="age_error" class="text-danger" style="display: none;">Age is required</span>
             </div>
             <div class="form-group">
                 <input type="email" id="email_field" class="form-control" placeholder="Email" required />
-                <div class="invalid-feedback">Please enter a valid email address.</div>
+                <span id="email_error" class="text-danger" style="display: none;">Email is required</span>
             </div>
             <div class="form-group">
                 <input type="password" id="password_field" class="form-control" placeholder="Password" required />
-                <div class="invalid-feedback">Please enter a password.</div>
+                <span id="password_error" class="text-danger" style="display: none;">Password is required</span>
             </div>
             <div class="form-group">
                 <select id="role_field" class="form-control" required>
@@ -107,7 +107,7 @@
                     <option value="Customer">Customer</option>
                     <option value="Publisher">Publisher</option>
                 </select>
-                <div class="invalid-feedback">Please select a role.</div>
+                <span id="role_error" class="text-danger" style="display: none;">Role is required</span>
             </div>
             <div class="form-group">
                 <select id="membership_field" class="form-control" required>
@@ -115,7 +115,7 @@
                     <option value="NormalMember">Normal Member</option>
                     <option value="GoldenMember">Golden Member</option>
                 </select>
-                <div class="invalid-feedback">Please select a Membership.</div>
+                <span id="membership_error" class="text-danger" style="display: none;">Membership is required</span>
             </div>
             <button id="register_button" type="submit" class="btn btn-primary py-2">Register</button>
         </form>

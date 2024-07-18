@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#login-form').submit(function(e) {
         e.preventDefault();
-        
+
         const email = $('#email').val();
         const password = $('#password').val();
 

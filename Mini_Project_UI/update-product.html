@@ -21,8 +21,125 @@
       type="text/css"
     />
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <style>
+      body {
+          font-family: 'Amazon Ember', sans-serif;
+      }
+      .hero-section {
+          background: linear-gradient(to bottom, rgba(155, 220, 236, 0.758), rgba(80, 137, 221, 0.5));
+          background-size: cover;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          color: white;
+          position: relative;
+      }
+      .hero-section h1 {
+          font-size: 4rem;
+          animation: fadeInDown 1s;
+      }
+      .hero-section p {
+          font-size: 1.5rem;
+          margin: 20px 0;
+          animation: fadeInUp 1s;
+      }
+      .hero-section .btn {
+          margin: 10px;
+          animation: fadeIn 2s;
+      }
+      @keyframes fadeInDown {
+          from { opacity: 0; transform: translateY(-50px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(50px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+      }
+      .navbar-nav .nav-item .nav-link.active {
+          font-weight: bold;
+      }
+      .section-title {
+          text-align: center;
+          margin: 50px 0;
+          font-size: 2.5rem;
+      }
+      .about-section {
+          background: linear-gradient(to right, #edb8b8, #e4b0b0);
+          padding: 50px 0;
+      }
+      .about-section p {
+          font-size: 1.2rem;
+          margin: 20px 0;
+      }
+      .why-us, .about-store {
+          margin: 30px 0;
+          animation: fadeIn 2s;
+      }
+      .why-us h3, .about-store h3 {
+          font-size: 1.8rem;
+          margin-bottom: 20px;
+      }
+      .about-section .btn {
+          display: block;
+          margin: 20px auto;
+      }
+      .about-content {
+          background: linear-gradient(to top,  rgba(161, 226, 242, 0.758), rgba(80, 137, 221, 0.5));
+          padding: 30px;
+          color: rgb(238, 236, 236);
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(206, 201, 201, 0.1);
+          animation: fadeInUp 2s;
+      }
+      .about-content h3 {
+          font-weight: bold;
+          margin-bottom: 15px;
+      }
+      .about-content p {
+          font-size: 1.1rem;
+      }
+
+      .logout-button {
+          display: none;
+      }
+
+  </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <h1>Presidio
+        <img src="images/logo.png" alt="Logo" style="width: 40px; height: 40px;"></h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" id="login-button" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="signup-button" href="register.html">Sign Up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-button" href="profile.html" style="display:none;">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="logout-button" href="#" style="display:none;">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a>
+            </li>
+        </ul>
+    </div>
+</nav>
     <div class="container container-fluid">
         <div class="wrapper my-5"> 
         <form class="shadow-lg" encType='multipart/form-data'>
@@ -37,7 +154,7 @@
                 value=""
               />
             </div>
-
+            <span id="name_error" class="text-danger" style="display: none;">Name is required</span>
             <div class="form-group">
                 <label for="price_field">Price</label>
                 <input
@@ -47,11 +164,13 @@
                   value=""
                 />
               </div>
+              <span id="name_price" class="text-danger" style="display: none;">Price is required</span>
 
               <div class="form-group">
                 <label for="description_field">Description</label>
                 <textarea class="form-control" id="description_field" rows="8" ></textarea>
               </div>
+              <span id="name_description" class="text-danger" style="display: none;">Description is required</span>
 
               <div class="form-group">
                 <label for="category_field">Category</label>
@@ -62,6 +181,8 @@
                     <option>Other Products</option>
                   </select>
               </div>
+              <span id="name_category" class="text-danger" style="display: none;">Category is required</span>
+
               <div class="form-group">
                 <label for="stock_field">Stock</label>
                 <input
@@ -71,6 +192,7 @@
                   value=""
                 />
               </div>
+              <span id="name_stock" class="text-danger" style="display: none;">Stock is required</span>
 
               <div class="form-group">
                 <label for="seller_field">Seller Name</label>
@@ -81,6 +203,7 @@
                   value=""
                 />
               </div>
+              <span id="name_seller" class="text-danger" style="display: none;">Seller Name is required</span>
               
               <div class='form-group'>
                 <label>Images</label>
@@ -98,6 +221,7 @@
                         </label>
                     </div>
             </div>
+            <span id="name_image" class="text-danger" style="display: none;">Images is required</span>
 
   
             <button

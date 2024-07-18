@@ -13,7 +13,7 @@
             font-family: 'Amazon Ember', sans-serif;
         }
         .hero-section {
-            background: linear-gradient(to bottom, rgba(245, 253, 255, 0.758), rgba(80, 137, 221, 0.5));
+            background: linear-gradient(to bottom, rgba(155, 220, 236, 0.758), rgba(80, 137, 221, 0.5));
             background-size: cover;
             height: 100vh;
             display: flex;
@@ -57,7 +57,7 @@
             font-size: 2.5rem;
         }
         .about-section {
-            background: linear-gradient(to right, #f9f9f9, #e0e0e0);
+            background: linear-gradient(to right, #d1f1f1, #6a6f71);
             padding: 50px 0;
         }
         .about-section p {
@@ -66,7 +66,7 @@
         }
         .why-us, .about-store {
             margin: 30px 0;
-            animation: fadeIn 2s;
+            animation: fadeIn 10s;
         }
         .why-us h3, .about-store h3 {
             font-size: 1.8rem;
@@ -77,12 +77,12 @@
             margin: 20px auto;
         }
         .about-content {
-            background: linear-gradient(to top,  rgba(245, 253, 255, 0.758), rgba(80, 137, 221, 0.5));
+            background: linear-gradient(to top,  rgba(161, 226, 242, 0.758), rgba(80, 137, 221, 0.5));
             padding: 30px;
             color: rgb(238, 236, 236);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(206, 201, 201, 0.1);
-            animation: fadeInUp 2s;
+            animation: fadeInUp 5s;
         }
         .about-content h3 {
             font-weight: bold;
@@ -95,12 +95,11 @@
         .logout-button {
             display: none;
         }
-
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.html">
             <h1>Presidio
             <img src="images/logo.png" alt="Logo" style="width: 40px; height: 40px;"></h1>
         </a>
@@ -120,6 +119,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="logout-button" href="#" style="display:none;">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="dashboard-button" href="dashboard.html" style="display:none;">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="add-video-button" href="add-video.html" style="display:none;">Add Video</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a>
@@ -143,7 +148,6 @@
         </div>
     </div>
 
-
     <div id="about" class="about-section">
         <div class="container">
             <h2 class="section-title">About Our Video Store</h2>
@@ -165,7 +169,7 @@
     </div>
 
     <footer class="text-center py-4">
-        <p>&copy; 2024 Shangu's Website. All rights reserved.</p>
+        <p>&copy; 2024 Shangu's Website. All rights reserved. | <a href="feedback.html">Give Feedback</a></p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

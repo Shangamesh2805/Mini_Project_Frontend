@@ -8,6 +8,24 @@
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <style>
+        .stars {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        .stars li {
+            cursor: pointer;
+            font-size: 2rem;
+            color: gray;
+        }
+        .stars .orange {
+            color: orange;
+        }
+        .stars .yellow {
+            color: yellow;
+        }
+    </style>
 </head>
 <body>
     <div class="container container-fluid">
@@ -48,14 +66,14 @@
                 star.starValue = index + 1;
 
                 ['click', 'mouseover', 'mouseout'].forEach(function(e) {
-                    star.addEventListener(e, showRaings);
+                    star.addEventListener(e, showRatings);
                 });
             });
 
-            function showRaings(e) {
+            function showRatings(e) {
                 stars.forEach((star, index) => {
-                    if(e.type === 'click') {
-                        if(index < this.starValue) {
+                    if (e.type === 'click') {
+                        if (index < this.starValue) {
                             star.classList.add('orange');
                             document.getElementById('rating').value = this.starValue;
                         } else {
@@ -63,15 +81,15 @@
                         }
                     }
 
-                    if(e.type === 'mouseover') {
-                        if(index < this.starValue) {
+                    if (e.type === 'mouseover') {
+                        if (index < this.starValue) {
                             star.classList.add('yellow');
                         } else {
                             star.classList.remove('yellow');
                         }
                     }
 
-                    if(e.type === 'mouseout') {
+                    if (e.type === 'mouseout') {
                         star.classList.remove('yellow');
                     }
                 });
@@ -100,9 +118,15 @@
                 .then(response => response.json())
                 .then(data => {
                     alert('Feedback submitted successfully!');
-                    window.location.href = `/video-details.html?id=${videoId}`;
+                    window.location.href = 'index.html'; // Redirect to the homepage
                 })
-                .catch(error => console.error('Error submitting feedback:', error));
+                .catch(error => {
+                    console.error('Error submitting feedback:', error);
+                    window.location.href = 'index.html'; // Redirect to the homepage even on error
+                });
+
+                // Redirect to the homepage immediately after clicking submit
+                window.location.href = 'index.html';
             });
         });
     </script>
